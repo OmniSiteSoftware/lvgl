@@ -99,9 +99,21 @@ static lv_point_t _evdev_process_pointer(lv_indev_t * indev, int x, int y)
 
     int offset_x = lv_display_get_offset_x(disp);
     int offset_y = lv_display_get_offset_y(disp);
-    int width = lv_display_get_horizontal_resolution(disp);
-    int height = lv_display_get_vertical_resolution(disp);
+    
+    lv_display_rotation_t disp_rotation = lv_display_get_rotation(disp);
+    int width,height;
 
+    if(disp_rotation == (LV_DISPLAY_ROTATION_90 || LV_DISPLAY_ROTATION_270))
+    {
+        height = lv_display_get_horizontal_resolution(disp);
+        width = lv_display_get_vertical_resolution(disp);
+    }
+    else
+    {
+        width = lv_display_get_horizontal_resolution(disp);
+        height = lv_display_get_vertical_resolution(disp);
+    }
+    
     lv_point_t p;
     p.x = _evdev_calibrate(swapped_x, dsc->min_x, dsc->max_x, offset_x, offset_x + width - 1);
     p.y = _evdev_calibrate(swapped_y, dsc->min_y, dsc->max_y, offset_y, offset_y + height - 1);

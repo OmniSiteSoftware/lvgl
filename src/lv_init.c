@@ -332,10 +332,6 @@ void lv_init(void)
     lv_libpng_init();
 #endif
 
-#if LV_USE_TJPGD
-    lv_tjpgd_init();
-#endif
-
 #if LV_USE_LIBJPEG_TURBO
     lv_libjpeg_turbo_init();
 #endif
@@ -348,6 +344,10 @@ void lv_init(void)
      *it's superior to any other */
 #if LV_USE_FFMPEG
     lv_ffmpeg_init();
+#endif
+
+#if LV_USE_TJPGD
+    lv_tjpgd_init();
 #endif
 
 #if LV_USE_FREETYPE
